@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="acbd254a73d042bc805f043710c0f66c" Name="Diagram1">
+        <EntityTypeShape EntityType="ContatosModel.Contato" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContatosModel.ContatoEmail" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContatosModel.ContatoTelefone" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContatosModel.TipoEmail" Width="1.5" PointX="0.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ContatosModel.TipoTelefone" Width="1.5" PointX="0.75" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="ContatosModel.FK_ContatoEmail_Contato" ManuallyRouted="false" />
+        <AssociationConnector Association="ContatosModel.FK_ContatoTelefone_Contato" ManuallyRouted="false" />
+        <AssociationConnector Association="ContatosModel.FK_ContatoEmail_TipoEmail" ManuallyRouted="false" />
+        <AssociationConnector Association="ContatosModel.FK_ContatoTelefone_TipoTelefone" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

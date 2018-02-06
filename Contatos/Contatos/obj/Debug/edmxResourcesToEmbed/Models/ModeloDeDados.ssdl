@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ContatosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Contato">
+    <Key>
+      <PropertyRef Name="ContatoID" />
+    </Key>
+    <Property Name="ContatoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContatoNome" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContatoDataNascimento" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContatoEmail">
+    <Key>
+      <PropertyRef Name="ContatoEmailID" />
+    </Key>
+    <Property Name="ContatoEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContatoID" Type="int" Nullable="false" />
+    <Property Name="TipoEmailID" Type="int" Nullable="false" />
+    <Property Name="ContatoEmail" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ContatoTelefone">
+    <Key>
+      <PropertyRef Name="ContatoTelefoneID" />
+    </Key>
+    <Property Name="ContatoTelefoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ContatoID" Type="int" Nullable="false" />
+    <Property Name="TipoTelefoneID" Type="int" Nullable="false" />
+    <Property Name="ContatoTelefoneDDD" Type="tinyint" Nullable="false" />
+    <Property Name="ContatoTelefoneNumero" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoEmail">
+    <Key>
+      <PropertyRef Name="TipoEmailID" />
+    </Key>
+    <Property Name="TipoEmailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoEmailNome" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TipoTelefone">
+    <Key>
+      <PropertyRef Name="TipoTelefoneID" />
+    </Key>
+    <Property Name="TipoTelefoneID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="TipoTelefoneNome" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ContatoEmail_Contato">
+    <End Role="Contato" Type="Self.Contato" Multiplicity="1" />
+    <End Role="ContatoEmail" Type="Self.ContatoEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contato">
+        <PropertyRef Name="ContatoID" />
+      </Principal>
+      <Dependent Role="ContatoEmail">
+        <PropertyRef Name="ContatoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContatoEmail_TipoEmail">
+    <End Role="TipoEmail" Type="Self.TipoEmail" Multiplicity="1" />
+    <End Role="ContatoEmail" Type="Self.ContatoEmail" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoEmail">
+        <PropertyRef Name="TipoEmailID" />
+      </Principal>
+      <Dependent Role="ContatoEmail">
+        <PropertyRef Name="TipoEmailID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContatoTelefone_Contato">
+    <End Role="Contato" Type="Self.Contato" Multiplicity="1" />
+    <End Role="ContatoTelefone" Type="Self.ContatoTelefone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Contato">
+        <PropertyRef Name="ContatoID" />
+      </Principal>
+      <Dependent Role="ContatoTelefone">
+        <PropertyRef Name="ContatoID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ContatoTelefone_TipoTelefone">
+    <End Role="TipoTelefone" Type="Self.TipoTelefone" Multiplicity="1" />
+    <End Role="ContatoTelefone" Type="Self.ContatoTelefone" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TipoTelefone">
+        <PropertyRef Name="TipoTelefoneID" />
+      </Principal>
+      <Dependent Role="ContatoTelefone">
+        <PropertyRef Name="TipoTelefoneID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ContatosModelStoreContainer">
+    <EntitySet Name="Contato" EntityType="Self.Contato" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContatoEmail" EntityType="Self.ContatoEmail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ContatoTelefone" EntityType="Self.ContatoTelefone" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoEmail" EntityType="Self.TipoEmail" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TipoTelefone" EntityType="Self.TipoTelefone" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_ContatoEmail_Contato" Association="Self.FK_ContatoEmail_Contato">
+      <End Role="Contato" EntitySet="Contato" />
+      <End Role="ContatoEmail" EntitySet="ContatoEmail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContatoEmail_TipoEmail" Association="Self.FK_ContatoEmail_TipoEmail">
+      <End Role="TipoEmail" EntitySet="TipoEmail" />
+      <End Role="ContatoEmail" EntitySet="ContatoEmail" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContatoTelefone_Contato" Association="Self.FK_ContatoTelefone_Contato">
+      <End Role="Contato" EntitySet="Contato" />
+      <End Role="ContatoTelefone" EntitySet="ContatoTelefone" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ContatoTelefone_TipoTelefone" Association="Self.FK_ContatoTelefone_TipoTelefone">
+      <End Role="TipoTelefone" EntitySet="TipoTelefone" />
+      <End Role="ContatoTelefone" EntitySet="ContatoTelefone" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

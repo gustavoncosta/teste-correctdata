@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ContatosModelStoreContainer" CdmEntityContainer="EntidadesContatosDB">
+    <EntitySetMapping Name="Contato">
+      <EntityTypeMapping TypeName="ContatosModel.Contato">
+        <MappingFragment StoreEntitySet="Contato">
+          <ScalarProperty Name="ContatoID" ColumnName="ContatoID" />
+          <ScalarProperty Name="ContatoNome" ColumnName="ContatoNome" />
+          <ScalarProperty Name="ContatoDataNascimento" ColumnName="ContatoDataNascimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContatoEmail">
+      <EntityTypeMapping TypeName="ContatosModel.ContatoEmail">
+        <MappingFragment StoreEntitySet="ContatoEmail">
+          <ScalarProperty Name="ContatoEmailID" ColumnName="ContatoEmailID" />
+          <ScalarProperty Name="ContatoID" ColumnName="ContatoID" />
+          <ScalarProperty Name="TipoEmailID" ColumnName="TipoEmailID" />
+          <ScalarProperty Name="ContatoEmail1" ColumnName="ContatoEmail" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ContatoTelefone">
+      <EntityTypeMapping TypeName="ContatosModel.ContatoTelefone">
+        <MappingFragment StoreEntitySet="ContatoTelefone">
+          <ScalarProperty Name="ContatoTelefoneID" ColumnName="ContatoTelefoneID" />
+          <ScalarProperty Name="ContatoID" ColumnName="ContatoID" />
+          <ScalarProperty Name="TipoTelefoneID" ColumnName="TipoTelefoneID" />
+          <ScalarProperty Name="ContatoTelefoneDDD" ColumnName="ContatoTelefoneDDD" />
+          <ScalarProperty Name="ContatoTelefoneNumero" ColumnName="ContatoTelefoneNumero" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoEmail">
+      <EntityTypeMapping TypeName="ContatosModel.TipoEmail">
+        <MappingFragment StoreEntitySet="TipoEmail">
+          <ScalarProperty Name="TipoEmailID" ColumnName="TipoEmailID" />
+          <ScalarProperty Name="TipoEmailNome" ColumnName="TipoEmailNome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoTelefone">
+      <EntityTypeMapping TypeName="ContatosModel.TipoTelefone">
+        <MappingFragment StoreEntitySet="TipoTelefone">
+          <ScalarProperty Name="TipoTelefoneID" ColumnName="TipoTelefoneID" />
+          <ScalarProperty Name="TipoTelefoneNome" ColumnName="TipoTelefoneNome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

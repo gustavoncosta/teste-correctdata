@@ -1,0 +1,63 @@
+﻿CREATE TABLE Contato
+(
+  ContatoID              INT           IDENTITY(1,1)   NOT NULL
+ ,ContatoNome            VARCHAR(100)                  NOT NULL
+ ,ContatoDataNascimento  DATETIME                      NOT NULL
+ ,CONSTRAINT PK_Contato PRIMARY KEY (ContatoID)
+ ,CONSTRAINT AK_Contato UNIQUE (ContatoNome)
+)
+GO
+		
+CREATE TABLE TipoTelefone
+(
+  TipoTelefoneID    INT         IDENTITY(1,1)  NOT NULL
+ ,TipoTelefoneNome  VARCHAR(50)                NOT NULL
+ ,CONSTRAINT PK_TipoTelefone PRIMARY KEY (TipoTelefoneID)
+)
+GO
+
+INSERT TipoTelefone (TipoTelefoneNome)
+SELECT 'RESIDENCIAL' UNION ALL
+SELECT 'COMERCIAL'   UNION ALL
+SELECT 'CELULAR'     UNION ALL
+SELECT 'FAX'         UNION ALL
+SELECT 'OUTROS'
+GO
+
+CREATE TABLE TipoEmail
+(
+  TipoEmailID    INT         IDENTITY(1,1) NOT NULL
+ ,TipoEmailNome  VARCHAR(50)               NOT NULL
+ ,CONSTRAINT PK_TipoEmail PRIMARY KEY (TipoEmailID)
+)
+GO
+
+INSERT TipoEmail (TipoEmailNome)
+SELECT 'PROFISSIONAL' UNION ALL
+SELECT 'PESSOAL'
+GO
+
+CREATE TABLE ContatoTelefone
+(
+  ContatoTelefoneID     INT      IDENTITY(1,1)   NOT NULL
+ ,ContatoID             INT                      NOT NULL
+ ,TipoTelefoneID        INT                      NOT NULL
+ ,ContatoTelefoneDDD    TINYINT                  NOT NULL
+ ,ContatoTelefoneNumero INT                      NOT NULL
+ ,CONSTRAINT PK_ContatoTelefone PRIMARY KEY (ContatoTelefoneID)
+ ,CONSTRAINT FK_ContatoTelefone_Contato FOREIGN KEY (ContatoID) REFERENCES Contato(ContatoID)
+ ,CONSTRAINT FK_ContatoTelefone_TipoTelefone FOREIGN KEY (TipoTelefoneID) REFERENCES TipoTelefone(TipoTelefoneID)
+)
+GO
+
+CREATE TABLE ContatoEmail
+(
+  ContatoEmailID  INT           IDENTITY(1,1)      NOT NULL
+ ,ContatoID       INT                              NOT NULL
+ ,TipoEmailID     INT                              NOT NULL
+ ,ContatoEmail    VARCHAR(100)                     NOT NULL
+ ,CONSTRAINT PK_ContatoEmail PRIMARY KEY (ContatoEmailID)
+ ,CONSTRAINT FK_ContatoEmail_Contato FOREIGN KEY (ContatoID) REFERENCES Contato(ContatoID)
+ ,CONSTRAINT FK_ContatoEmail_TipoEmail FOREIGN KEY (TipoEmailID) REFERENCES TipoEmail(TipoEmailID)
+)
+GO

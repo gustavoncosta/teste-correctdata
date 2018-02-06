@@ -1,0 +1,110 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Form</title>
+</head>
+<body>
+    <div>
+        <h2>Contato</h2> 
+        <form action="@ViewBag.ActionForm" method="post">
+            <label for="nome">Nome:</label>
+            <input id="nome" name="contato.ContatoNome" value="@ViewBag.Contato.ContatoNome" />
+            <br />
+
+            <label for="nome">Data de nascimento:</label>
+            <input id="nome" name="contato.ContatoDataNascimento" value="@String.Format("{0:dd/mm/yyyy}", ViewBag.Contato.ContatoDataNascimento)" />
+            <br />
+
+            <input type="submit" value="Salvar" />
+        </form>
+
+        <h2>Telefones</h2>
+        <form action="/Telefone/Adicionar?contatoId=@ViewBag.Contato.ContatoID" method="post">
+            <select name="telefone.TipoTelefoneID">
+                @foreach(var tipo in ViewBag.TiposTelefone)
+                {
+                    <option value="@tipo.TipoTelefoneID">@tipo.TipoTelefoneNome</option>
+                }
+            </select>
+            
+            <label for="ddd">DDD:</label>
+            <input id="ddd" name="telefone.ContatoTelefoneDDD" />
+
+            <label for="numero">Número:</label>
+            <input id="numero" name="telefone.ContatoTelefoneNumero" />
+
+            <input type="submit" value="Cadastrar" />
+            <br />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>DDD</th>
+                        <th>Número</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var telefone in ViewBag.Telefones)
+                    {
+                        <tr>
+                            <td>@telefone.ContatoTelefoneID</td>
+                            <td>@telefone.TipoTelefone.TipoTelefoneNome</td>
+                            <td>@telefone.ContatoTelefoneDDD</td>
+                            <td>@telefone.ContatoTelefoneNumero</td>
+                            <td><a href="@Url.Action("Remover", "Telefone", new { contatoTelefoneId = telefone.ContatoTelefoneID })">Remover</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        </form>
+
+        <h2>Emails</h2>
+        <form action="/Email/Adicionar?contatoId=@ViewBag.Contato.ContatoID" method="post">
+            <select name="email.TipoEmailID">
+                @foreach (var tipo in ViewBag.TiposEmail)
+                {
+                    <option value="@tipo.TipoEmailID">@tipo.TipoEmailNome</option>
+                }
+            </select>
+
+            <label for="email">Email:</label>
+            <input id="email" name="email.ContatoEmail1" />
+
+            <input type="submit" value="Cadastrar" />
+            <br />
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Tipo</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var email in ViewBag.Emails)
+                    {
+                        <tr>
+                            <td>@email.ContatoEmailID</td>
+                            <td>@email.TipoEmail.TipoEmailNome</td>
+                            <td>@email.ContatoEmail1</td>
+                            <td><a href="@Url.Action("Remover", "Email", new { contatoEmailID = email.ContatoEmailID })">Remover</a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </form>
+        <br />
+        <a href="@Url.Action("Index", "Contato")">Voltar para a Lista de Contatos</a>
+    </div>
+</body>
+</html>

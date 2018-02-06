@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div> 
+        <h1>Lista de Contatos</h1>
+        <hr />
+        <h2>Índice</h2>
+        @for(var i=65; i<=90; i++)
+        {
+            char letra = Convert.ToChar(i);
+            <a href="/Contato/Index?filtrarNome=@letra">@letra</a>
+        }
+        -
+        <a href="/Contato/Index?filtrarNome=Todos">Todos</a>
+        <hr />
+        <a href="@Url.Action("Form", "Contato", new { ContatoID = 0})">Cadastrar</a>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome Completo</th>
+                    <th>Telefone</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var contato in ViewBag.Contatos)
+                {
+                    <tr>
+                        <td>@contato.ContatoID</td>
+                        <td><a href="@Url.Action("Form", "Contato", new { ContatoID = contato.ContatoID })">@contato.ContatoNome</a></td>
+                        <td></td>
+                        <td></td>
+                        <td><a href="@Url.Action("Remover", "Contato", new { ContatoID = contato.ContatoID })">Remover</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
